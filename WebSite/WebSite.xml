@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site>
+    <Page>
+        <Title>Example News Page</Title>
+        <Type>News</Type>
+        <Chars>
+            <HasEmail>true</HasEmail>
+            <HasNews>true</HasNews>
+            <HasVoting>
+                <Available>true</Available>
+                <Type>Anonymous</Type>
+            </HasVoting>
+            <PaidContent>false</PaidContent>
+        </Chars>
+        <Authorize>true</Authorize>
+    </Page>
+
+    <Page>
+        <Title>Example Portal</Title>
+        <Type>Portal</Type>
+        <Chars>
+            <HasEmail>true</HasEmail>
+            <HasVoting>
+                <Available>false</Available>
+            </HasVoting>
+            <PaidContent>true</PaidContent>
+        </Chars>
+        <Authorize>false</Authorize>
+    </Page>
+
+    <Page>
+        <Title>Example Advertisement Page</Title>
+        <Type>Advertisement</Type>
+        <Chars>
+            <HasVoting>
+                <Available>true</Available>
+                <Type>WithAuthorization</Type>
+            </HasVoting>
+            <PaidContent>true</PaidContent>
+        </Chars>
+        <Authorize>false</Authorize>
+    </Page>
+
+    <Page>
+        <Title>Example Mirror Page</Title>
+        <Type>Mirror</Type>
+        <Chars>
+            <HasEmail>true</HasEmail>
+            <HasArchives>true</HasArchives>
+            <HasVoting>
+                <Available>true</Available>
+                <Type>Anonymous</Type>
+            </HasVoting>
+            <PaidContent>false</PaidContent>
+        </Chars>
+        <Authorize>false</Authorize>
+    </Page>
+</Site>
