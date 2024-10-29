@@ -1,7 +1,6 @@
-namespace WebSite;
-using System;
 using System.Collections.Generic;
 using System.Xml;
+using WebSite;
 
 public class XMLReader
 {
@@ -11,7 +10,7 @@ public class XMLReader
 
         using (XmlReader reader = XmlReader.Create(xmlFilePath))
         {
-            Page page = null;
+            Page? page = null;
 
             while (reader.Read())
             {
@@ -24,17 +23,26 @@ public class XMLReader
                             break;
 
                         case "Title":
-                            reader.Read();
-                            page!.Title = reader.Value;
+                            if (page != null)
+                            {
+                                reader.Read();
+                                page.Title = reader.Value;
+                            }
                             break;
 
                         case "Type":
-                            reader.Read();
-                            page!.Type = reader.Value;
+                            if (page != null)
+                            {
+                                reader.Read();
+                                page.Type = reader.Value;
+                            }
                             break;
 
                         case "Chars":
-                            // Читаємо дочірні елементи Chars
+                            if (page != null && page.Chars == null)
+                            {
+                                page.Chars = new Characteristics();
+                            }
                             while (reader.Read() && !(reader.NodeType == XmlNodeType.EndElement && reader.Name == "Chars"))
                             {
                                 if (reader.NodeType == XmlNodeType.Element)
@@ -43,26 +51,49 @@ public class XMLReader
                                     {
                                         case "HasEmail":
                                             reader.Read();
-                                            page!.Chars.HasEmail = bool.Parse(reader.Value);
+                                            if (page?.Chars != null)
+                                            {
+                                                page.Chars.HasEmail = bool.Parse(reader.Value);
+                                            }
                                             break;
+
                                         case "HasNews":
                                             reader.Read();
-                                            page!.Chars.HasNews = bool.Parse(reader.Value);
+                                            if (page?.Chars != null)
+                                            {
+                                                page.Chars.HasNews = bool.Parse(reader.Value);
+                                            }
                                             break;
+
                                         case "hasArchives":
-                                            page!.Chars.hasArchives = new Voting();
+                                            if (page?.Chars != null && page.Chars.hasArchives == null)
+                                            {
+                                                page.Chars.hasArchives = new Voting();
+                                            }
                                             break;
+
                                         case "Available":
                                             reader.Read();
-                                            page!.Chars.hasArchives!.Available = bool.Parse(reader.Value);
+                                            if (page?.Chars?.hasArchives != null)
+                                            {
+                                                page.Chars.hasArchives.Available = bool.Parse(reader.Value);
+                                            }
                                             break;
+
                                         case "Type":
                                             reader.Read();
-                                            page!.Chars.hasArchives!.Type = reader.Value;
+                                            if (page?.Chars?.hasArchives != null)
+                                            {
+                                                page.Chars.hasArchives.Type = reader.Value;
+                                            }
                                             break;
+
                                         case "PaidContent":
                                             reader.Read();
-                                            page!.Chars.PaidContent = bool.Parse(reader.Value);
+                                            if (page?.Chars != null)
+                                            {
+                                                page.Chars.PaidContent = bool.Parse(reader.Value);
+                                            }
                                             break;
                                     }
                                 }
@@ -70,15 +101,21 @@ public class XMLReader
                             break;
 
                         case "Authorize":
-                            reader.Read();
-                            page!.Authorize = bool.Parse(reader.Value);
+                            if (page != null)
+                            {
+                                reader.Read();
+                                page.Authorize = bool.Parse(reader.Value);
+                            }
                             break;
                     }
                 }
                 else if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "Page")
                 {
-                    pages.Add(page!);
-                    page = null;
+                    if (page != null)
+                    {
+                        pages.Add(page);
+                        page = null;
+                    }
                 }
             }
         }
