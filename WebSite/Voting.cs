@@ -2,6 +2,6 @@ namespace WebSite;
 
 public class Voting
 {
-    public bool Available { get; set; }   // Наявність голосування
+    public bool Available { get; set; }   
     public string Type { get; set; } 
 }

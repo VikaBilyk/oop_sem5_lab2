@@ -1,32 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="Site" type="SiteType"/>
-    <xs:complexType name="CharsType">
-        <xs:sequence>
-            <xs:element type="xs:string" name="HasEmail" minOccurs="0"/>
-            <xs:element type="xs:string" name="HasNews" minOccurs="0"/>
-            <xs:element type="xs:string" name="HasArchives" minOccurs="0"/>
-            <xs:element type="HasVotingType" name="HasVoting"/>
-            <xs:element type="xs:string" name="PaidContent"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="HasVotingType">
-        <xs:sequence>
-            <xs:element type="xs:string" name="Available"/>
-            <xs:element type="xs:string" name="Type" minOccurs="0"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="SiteType">
-        <xs:sequence>
-            <xs:element type="PageType" name="Page" maxOccurs="unbounded" minOccurs="0"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="PageType">
-        <xs:sequence>
-            <xs:element type="xs:string" name="Title"/>
-            <xs:element type="xs:string" name="Type"/>
-            <xs:element type="CharsType" name="Chars"/>
-            <xs:element type="xs:string" name="Authorize"/>
-        </xs:sequence>
-    </xs:complexType>
+
+    <!-- Головний елемент Site -->
+    <xs:element name="Site">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Page" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Title" type="xs:string" />
+                            <xs:element name="Type" type="PageType" />
+                            <xs:element name="Chars">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="HasEmail" type="xs:boolean" minOccurs="0" />
+                                        <xs:element name="HasNews" type="xs:boolean" minOccurs="0" />
+                                        <xs:element name="HasArchives" type="xs:boolean" minOccurs="0" />
+                                        <xs:element name="HasVoting">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Available" type="xs:boolean" />
+                                                    <xs:element name="Type" type="VotingType" minOccurs="0" />
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="PaidContent" type="xs:boolean" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Authorize" type="xs:boolean" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Перелічувані типи -->
+    <xs:simpleType name="PageType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="News" />
+            <xs:enumeration value="Portal" />
+            <xs:enumeration value="Advertisement" />
+            <xs:enumeration value="Mirror" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="VotingType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Anonymous" />
+            <xs:enumeration value="WithAuthorization" />
+        </xs:restriction>
+    </xs:simpleType>
+
 </xs:schema>
