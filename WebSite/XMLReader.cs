@@ -42,23 +42,29 @@ public class XmlReader
                             reader.Read();
                             page!.Chars.HasNews = bool.Parse(reader.Value);
                             break;
-                        case "HasArchive":
+                        case "HasArchives":
                             reader.Read();
                             page!.Chars.HasArchives = bool.Parse(reader.Value);
                             break;
 
                         case "HasVoting":
                             reader.Read();
-                            page!.Chars.HasVoting = bool.Parse(reader.Value);
+                            page!.Chars.HasVoting = true;
                             break;
                         
                         case "Anonymous":
-                            reader.Read();
-                            page!.Chars.Anonymous = bool.Parse(reader.Value);
+                            if (page!.Chars.HasVoting)
+                            {
+                                reader.Read();
+                                page.Chars.Anonymous = bool.Parse(reader.Value);
+                            }
                             break;
                         case "Authorization":
-                            reader.Read();
-                            page!.Chars.Authorization = bool.Parse(reader.Value);
+                            if (page!.Chars.HasVoting)
+                            {
+                                reader.Read();
+                                page.Chars.Authorization = bool.Parse(reader.Value);
+                            }
                             break;
                         
                         case "PaidContent":

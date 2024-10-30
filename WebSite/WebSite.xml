@@ -1,15 +1,12 @@
 <Site>
   <Page>
-    <Title>f</Title>
-    <Type>Portal</Type>
+    <Title>d</Title>
+    <Type>Advertising</Type>
     <Authorize>true</Authorize>
     <Chars>
-      <HasEmail>true</HasEmail>
+      <HasVoting>True</HasVoting>
+      <Anonymous>false</Anonymous>
       <PaidContent>true</PaidContent>
-      <HasVoting>
-        <Available>true</Available>
-        <Type>h</Type>
-      </HasVoting>
     </Chars>
   </Page>
 </Site>

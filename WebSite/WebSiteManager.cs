@@ -1,92 +1,106 @@
+// change voting
 using System.Xml;
 using static System.Console;
+
 namespace WebSite;
 
 public class WebSiteManager
 {
     public void GetAndSaveToXml(string filepath)
+    {
+        var doc = new XmlDocument();
+        var root = doc.CreateElement("Site");
+        doc.AppendChild(root);
+
+        WriteLine("Скільки сторінок ви хочете додати?");
+        int pageCount = int.Parse(ReadLine()!);
+
+        for (int i = 0; i < pageCount; i++)
         {
-            var doc = new System.Xml.XmlDocument();
-            var root = doc.CreateElement("Site");
-            doc.AppendChild(root);
+            var page = doc.CreateElement("Page");
 
-            WriteLine("Скільки сторінок ви хочете додати?");
-            int pageCount = int.Parse(ReadLine()!);
+            Write("Title: ");
+            var title = doc.CreateElement("Title");
+            title.InnerText = ReadLine()!;
+            page.AppendChild(title);
 
-            for (int i = 0; i < pageCount; i++)
+            Write("Type: ");
+            string typeOptions = "Advertising - 1,\nNews - 2,\nPortal - 3,\nMirror - 4";
+            WebSiteType selectedType = SelectInfoFromUserInput(GetInfoFromUserInput(typeOptions, 4));
+            var type = doc.CreateElement("Type");
+            type.InnerText = selectedType.ToString();
+            page.AppendChild(type);
+
+            var chars = doc.CreateElement("Chars");
+
+            // Додавання характеристик залежно від типу вебсайту
+            if (selectedType == WebSiteType.Portal || 
+                selectedType == WebSiteType.News || 
+                selectedType == WebSiteType.Mirror)
             {
-                var page = doc.CreateElement("Page");
-
-                Write("Title: ");
-                var title = doc.CreateElement("Title");
-                title.InnerText = ReadLine()!;
-                page.AppendChild(title);
-
-                Write("Type: ");
-                var type = doc.CreateElement("Type");
-                string typeOptins = "Advertising - 1,\n    News - 2,\n    Portal - 3,\n    Mirror - 3";
-                WebSiteType selectedType = SelectInfoFromUserInput(GetInfoFromUserInput(typeOptins, 4));
-                type.InnerText = selectedType.ToString();
-                page.AppendChild(type);
-                
-                var chars = doc.CreateElement("Chars");
-                
-                if(type.InnerText == WebSiteType.Portal.ToString() || 
-                   type.InnerText == WebSiteType.News.ToString() || 
-                   type.InnerText == WebSiteType.Mirror.ToString())
-                {
-                    Write("HasEmail (true/false): ");
-                    var hasEmail = doc.CreateElement("HasEmail");
-                    hasEmail.InnerText = ReadLine()!;
-                    chars.AppendChild(hasEmail);
-                }
-                
-                if(type.InnerText == WebSiteType.News.ToString())
-                {
-                    Write("HasNews (true/false): ");
-                    var hasNews = doc.CreateElement("HasNews");
-                    hasNews.InnerText = ReadLine()!;
-                    chars.AppendChild(hasNews);
-                }
-                
-                if(type.InnerText == WebSiteType.Mirror.ToString())
-                {
-                    Write("HasArchive (true/false): ");
-                    var hasArchive = doc.CreateElement("HasArchive");
-                    hasArchive.InnerText = ReadLine()!;
-                    chars.AppendChild(hasArchive);
-                }
-
-                Write("PaidContent (true/false): ");
-                var paidContent = doc.CreateElement("PaidContent");
-                paidContent.InnerText = ReadLine()!;
-                chars.AppendChild(paidContent);
-
-                Write("HasVoting Available (true/false): ");
-                var voting = doc.CreateElement("HasVoting");
-                var available = doc.CreateElement("Available");
-                available.InnerText = ReadLine()!;
-                voting.AppendChild(available);
-
-                Write("Voting Type: ");
-                var votingType = doc.CreateElement("Type");
-                votingType.InnerText = ReadLine()!;
-                voting.AppendChild(votingType);
-                
-                Write("Authorize (true/false): ");
-                var authorize = doc.CreateElement("Authorize");
-                authorize.InnerText = ReadLine()!;
-                page.AppendChild(authorize);
-
-
-                chars.AppendChild(voting);
-                page.AppendChild(chars);
-                root.AppendChild(page);
+                Write("HasEmail (true/false): ");
+                var hasEmail = doc.CreateElement("HasEmail");
+                hasEmail.InnerText = ReadLine()!;
+                chars.AppendChild(hasEmail);
             }
 
-            doc.Save(filepath);
-            WriteLine("Дані збережено у XML файл.");
+            if (selectedType == WebSiteType.News)
+            {
+                Write("HasNews (true/false): ");
+                var hasNews = doc.CreateElement("HasNews");
+                hasNews.InnerText = ReadLine()!;
+                chars.AppendChild(hasNews);
+            }
+
+            if (selectedType == WebSiteType.Mirror)
+            {
+                Write("HasArchive (true/false): ");
+                var hasArchive = doc.CreateElement("HasArchive");
+                hasArchive.InnerText = ReadLine()!;
+                chars.AppendChild(hasArchive);
+            }
+
+            // Додавання елементів голосування
+            Write("Has voting (true/false): ");
+            bool hasVotingBool = bool.Parse(ReadLine()!);
+            var hasVoting = doc.CreateElement("HasVoting");
+            hasVoting.InnerText = hasVotingBool.ToString();
+            chars.AppendChild(hasVoting);
+
+            if (hasVotingBool)
+            {
+                Write("Anonymous (true/false): ");
+                var anonymous = doc.CreateElement("Anonymous");
+                anonymous.InnerText = ReadLine()!;
+                chars.AppendChild(anonymous);
+            }
+            else
+            {
+                WriteLine("The voting requires authorization");
+                var authorization = doc.CreateElement("Authorization");
+                authorization.InnerText = "true";
+                chars.AppendChild(authorization);
+            }
+
+            // Інші характеристики
+            Write("PaidContent (true/false): ");
+            var paidContent = doc.CreateElement("PaidContent");
+            paidContent.InnerText = ReadLine()!;
+            chars.AppendChild(paidContent);
+
+            Write("Authorize (true/false): ");
+            var authorize = doc.CreateElement("Authorize");
+            authorize.InnerText = ReadLine()!;
+            page.AppendChild(authorize);
+
+            page.AppendChild(chars);
+            root.AppendChild(page);
         }
+
+        doc.Save(filepath);
+        WriteLine("Дані збережено у XML файл.");
+    }
+
     private static int GetInfoFromUserInput(string input, int max)
     {
         bool exit = false;
@@ -97,7 +111,7 @@ public class WebSiteManager
             WriteLine("___________________________________");
 
             string? userInput = ReadLine();
-        
+
             // Ensure we have a valid input
             if (!int.TryParse(userInput, out value) || value < 1 || value > max)
             {
@@ -111,24 +125,20 @@ public class WebSiteManager
 
         return value;
     }
-    
+
     private static WebSiteType SelectInfoFromUserInput(int value)
     {
-        switch (value)
+        return value switch
         {
-            case 1:
-                return WebSiteType.Advertising;
-            case 2:
-                return WebSiteType.News;
-            case 3:
-                return WebSiteType.Portal;
-            case 4:
-                return WebSiteType.Mirror;
-            default:
-                throw new Exception("Invalid value provided.");
-        }
+            1 => WebSiteType.Advertising,
+            2 => WebSiteType.News,
+            3 => WebSiteType.Portal,
+            4 => WebSiteType.Mirror,
+            _ => throw new Exception("Invalid value provided.")
+        };
     }
 }
+
 public enum WebSiteType
 {
     Advertising,

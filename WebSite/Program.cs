@@ -20,10 +20,10 @@ class Program
             Console.WriteLine("XmlReader");
             Console.WriteLine($"Title: {page.Title}, Type: {page.Type}, Authorize: {page.Authorize}");
             Console.WriteLine($"HasEmail: {page.Chars.HasEmail}, HasNews: {page.Chars.HasNews}, PaidContent: {page.Chars.PaidContent}");
-            // if (page.Chars.hasArchives != null)
-            // {
-            //     Console.WriteLine($"HasArchives - Available: {page.Chars.hasArchives.Available}, Type: {page.Chars.hasArchives.Type}");
-            // }
+            if (page.Chars.HasVoting != null)
+            {
+                Console.WriteLine($"Anonymous: {page.Chars.Anonymous}, Authorization: {page.Chars.Authorization}");
+            }
         }
         
         XmlDocumentHandler doc = new XmlDocumentHandler();
@@ -33,10 +33,10 @@ class Program
             Console.WriteLine("XmlDocument: ");
             Console.WriteLine($"Title: {page.Title}, Type: {page.Type}, Authorize: {page.Authorize}");
             Console.WriteLine($"HasEmail: {page.Chars.HasEmail}, HasNews: {page.Chars.HasNews}, PaidContent: {page.Chars.PaidContent}");
-            // if (page.Chars.hasArchives != null)
-            // {
-            //     Console.WriteLine($"HasArchives - Available: {page.Chars.hasArchives.Available}, Type: {page.Chars.hasArchives.Type}");
-            // }
+            if (page.Chars.HasVoting != null)
+            {
+                Console.WriteLine($"Anonymous: {page.Chars.Anonymous}, Authorization: {page.Chars.Authorization}");
+            }
         }
         
     }

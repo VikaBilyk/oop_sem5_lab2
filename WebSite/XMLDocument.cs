@@ -62,21 +62,20 @@ namespace WebSite
                     XmlNode? hasVotingNode = charsNode.SelectSingleNode("HasVoting");
                     if (hasVotingNode != null)
                     {
-                        page.Chars.HasVoting = bool.Parse(hasVotingNode.InnerText);
-                    }
+                        page.Chars.HasVoting = true;
 
-                    XmlNode? anonymousNode = charsNode.SelectSingleNode("Anonymous");
-                    if (anonymousNode != null)
-                    {
-                        page.Chars.Anonymous = bool.Parse(anonymousNode.InnerText);
-                    }
+                        XmlNode? anonymousNode = hasVotingNode.SelectSingleNode("Anonymous");
+                        if (anonymousNode != null && bool.TryParse(anonymousNode.InnerText, out bool anonymous))
+                        {
+                            page.Chars.Anonymous = anonymous;
+                        }
 
-                    XmlNode? authorizationNode = charsNode.SelectSingleNode("Authorization");
-                    if (authorizationNode != null)
-                    {
-                        page.Chars.Authorization = bool.Parse(authorizationNode.InnerText);
+                        XmlNode? authorizationNode = hasVotingNode.SelectSingleNode("Authorization");
+                        if (authorizationNode != null && bool.TryParse(authorizationNode.InnerText, out bool authorization))
+                        {
+                            page.Chars.Authorization = authorization;
+                        }
                     }
-
                     XmlNode? paidContentNode = charsNode.SelectSingleNode("PaidContent");
                     if (paidContentNode != null)
                     {
