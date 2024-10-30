@@ -1,7 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-
+﻿using System.Xml;
 using System.Xml.Linq;
 using WebSite;
+using XmlReader = WebSite.XmlReader;
 
 class Program
 {
@@ -9,19 +9,34 @@ class Program
     {
         string filePath = "/Users/viktoriyabilyk/RiderProjects/WebSite/WebSite/WebSite.xml";
         
-        XDocument doc = XDocument.Load(filePath);
+        WebSiteManager webSiteManager = new WebSiteManager();
+        webSiteManager.GetAndSaveToXml(filePath);
         
-        XMLReader xmlReader = new XMLReader();
-        List<Page> pages = xmlReader.ParseXml(filePath);
+        XmlReader xmlReader = new XmlReader();
+        List<Page> rPages = xmlReader.ParseXml(filePath);
 
-        foreach (var page in pages)
+        foreach (var page in rPages)
         {
+            Console.WriteLine("XmlReader");
             Console.WriteLine($"Title: {page.Title}, Type: {page.Type}, Authorize: {page.Authorize}");
             Console.WriteLine($"HasEmail: {page.Chars.HasEmail}, HasNews: {page.Chars.HasNews}, PaidContent: {page.Chars.PaidContent}");
-            if (page.Chars.hasArchives != null)
-            {
-                Console.WriteLine($"HasArchives - Available: {page.Chars.hasArchives.Available}, Type: {page.Chars.hasArchives.Type}");
-            }
+            // if (page.Chars.hasArchives != null)
+            // {
+            //     Console.WriteLine($"HasArchives - Available: {page.Chars.hasArchives.Available}, Type: {page.Chars.hasArchives.Type}");
+            // }
+        }
+        
+        XmlDocumentHandler doc = new XmlDocumentHandler();
+        List<Page> dPages = doc.ParseXml(filePath);
+        foreach (var page in dPages)
+        {
+            Console.WriteLine("XmlDocument: ");
+            Console.WriteLine($"Title: {page.Title}, Type: {page.Type}, Authorize: {page.Authorize}");
+            Console.WriteLine($"HasEmail: {page.Chars.HasEmail}, HasNews: {page.Chars.HasNews}, PaidContent: {page.Chars.PaidContent}");
+            // if (page.Chars.hasArchives != null)
+            // {
+            //     Console.WriteLine($"HasArchives - Available: {page.Chars.hasArchives.Available}, Type: {page.Chars.hasArchives.Type}");
+            // }
         }
         
     }
