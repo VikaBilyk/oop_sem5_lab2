@@ -12,32 +12,36 @@ class Program
         WebSiteManager webSiteManager = new WebSiteManager();
         webSiteManager.GetAndSaveToXml(filePath);
         
+        // Читання даних за допомогою XmlReader
         XmlReader xmlReader = new XmlReader();
-        List<Page> rPages = xmlReader.ParseXml(filePath);
+        List<Page> pagesFromXmlReader = xmlReader.ParseXml(filePath);
+        Console.WriteLine("*************************************");
+        Console.WriteLine("Читання даних за допомогою XmlReader:");
+        Console.WriteLine("*************************************");
+        DisplayPages(pagesFromXmlReader);
 
-        foreach (var page in rPages)
-        {
-            Console.WriteLine("XmlReader");
-            Console.WriteLine($"Title: {page.Title}, Type: {page.Type}, Authorize: {page.Authorize}");
-            Console.WriteLine($"HasEmail: {page.Chars.HasEmail}, HasNews: {page.Chars.HasNews}, PaidContent: {page.Chars.PaidContent}");
-            if (page.Chars.HasVoting != null)
-            {
-                Console.WriteLine($"Anonymous: {page.Chars.Anonymous}, Authorization: {page.Chars.Authorization}");
-            }
-        }
         
         XmlDocumentHandler doc = new XmlDocumentHandler();
-        List<Page> dPages = doc.ParseXml(filePath);
-        foreach (var page in dPages)
+        // Читання даних за допомогою XmlDocument
+        List<Page> pagesFromXmlDocument = doc.ParseXml(filePath);
+        Console.WriteLine("*************************************");
+        Console.WriteLine("Читання даних за допомогою XmlDocument:");
+        Console.WriteLine("*************************************");
+        DisplayPages(pagesFromXmlDocument);
+    }
+    
+    static void DisplayPages(List<Page> pages)
+    {
+        foreach (var page in pages)
         {
-            Console.WriteLine("XmlDocument: ");
             Console.WriteLine($"Title: {page.Title}, Type: {page.Type}, Authorize: {page.Authorize}");
             Console.WriteLine($"HasEmail: {page.Chars.HasEmail}, HasNews: {page.Chars.HasNews}, PaidContent: {page.Chars.PaidContent}");
-            if (page.Chars.HasVoting != null)
+                
+            if (page.Chars.HasVoting != null && page.Chars.HasVoting == true)
             {
                 Console.WriteLine($"Anonymous: {page.Chars.Anonymous}, Authorization: {page.Chars.Authorization}");
             }
+            Console.WriteLine("____________________________________");
         }
-        
     }
 }

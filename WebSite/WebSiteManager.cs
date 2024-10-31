@@ -1,148 +1,141 @@
-// change voting
-using System.Xml;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Linq;
 using static System.Console;
 
-namespace WebSite;
-
-public class WebSiteManager
+namespace WebSite
 {
-    public void GetAndSaveToXml(string filepath)
+    public class WebSiteManager
     {
-        var doc = new XmlDocument();
-        var root = doc.CreateElement("Site");
-        doc.AppendChild(root);
-
-        WriteLine("Скільки сторінок ви хочете додати?");
-        int pageCount = int.Parse(ReadLine()!);
-
-        for (int i = 0; i < pageCount; i++)
+        public void GetAndSaveToXml(string filepath)
         {
-            var page = doc.CreateElement("Page");
+            XDocument xmlDoc;
 
-            Write("Title: ");
-            var title = doc.CreateElement("Title");
-            title.InnerText = ReadLine()!;
-            page.AppendChild(title);
-
-            Write("Type: ");
-            string typeOptions = "Advertising - 1,\nNews - 2,\nPortal - 3,\nMirror - 4";
-            WebSiteType selectedType = SelectInfoFromUserInput(GetInfoFromUserInput(typeOptions, 4));
-            var type = doc.CreateElement("Type");
-            type.InnerText = selectedType.ToString();
-            page.AppendChild(type);
-
-            var chars = doc.CreateElement("Chars");
-
-            // Додавання характеристик залежно від типу вебсайту
-            if (selectedType == WebSiteType.Portal || 
-                selectedType == WebSiteType.News || 
-                selectedType == WebSiteType.Mirror)
+            // Завантажуємо існуючий файл або створюємо новий документ
+            if (File.Exists(filepath))
             {
-                Write("HasEmail (true/false): ");
-                var hasEmail = doc.CreateElement("HasEmail");
-                hasEmail.InnerText = ReadLine()!;
-                chars.AppendChild(hasEmail);
-            }
-
-            if (selectedType == WebSiteType.News)
-            {
-                Write("HasNews (true/false): ");
-                var hasNews = doc.CreateElement("HasNews");
-                hasNews.InnerText = ReadLine()!;
-                chars.AppendChild(hasNews);
-            }
-
-            if (selectedType == WebSiteType.Mirror)
-            {
-                Write("HasArchive (true/false): ");
-                var hasArchive = doc.CreateElement("HasArchive");
-                hasArchive.InnerText = ReadLine()!;
-                chars.AppendChild(hasArchive);
-            }
-
-            // Додавання елементів голосування
-            Write("Has voting (true/false): ");
-            bool hasVotingBool = bool.Parse(ReadLine()!);
-            var hasVoting = doc.CreateElement("HasVoting");
-            hasVoting.InnerText = hasVotingBool.ToString();
-            chars.AppendChild(hasVoting);
-
-            if (hasVotingBool)
-            {
-                Write("Anonymous (true/false): ");
-                var anonymous = doc.CreateElement("Anonymous");
-                anonymous.InnerText = ReadLine()!;
-                chars.AppendChild(anonymous);
+                xmlDoc = XDocument.Load(filepath);
             }
             else
             {
-                WriteLine("The voting requires authorization");
-                var authorization = doc.CreateElement("Authorization");
-                authorization.InnerText = "true";
-                chars.AppendChild(authorization);
+                xmlDoc = new XDocument(new XElement("Site"));
             }
 
-            // Інші характеристики
-            Write("PaidContent (true/false): ");
-            var paidContent = doc.CreateElement("PaidContent");
-            paidContent.InnerText = ReadLine()!;
-            chars.AppendChild(paidContent);
+            XElement root = xmlDoc.Element("Site");
 
-            Write("Authorize (true/false): ");
-            var authorize = doc.CreateElement("Authorize");
-            authorize.InnerText = ReadLine()!;
-            page.AppendChild(authorize);
+            WriteLine("Скільки сторінок ви хочете додати?");
+            int pageCount = int.Parse(ReadLine()!);
 
-            page.AppendChild(chars);
-            root.AppendChild(page);
-        }
-
-        doc.Save(filepath);
-        WriteLine("Дані збережено у XML файл.");
-    }
-
-    private static int GetInfoFromUserInput(string input, int max)
-    {
-        bool exit = false;
-        int value = 0;
-        while (!exit)
-        {
-            WriteLine(input);
-            WriteLine("___________________________________");
-
-            string? userInput = ReadLine();
-
-            // Ensure we have a valid input
-            if (!int.TryParse(userInput, out value) || value < 1 || value > max)
+            for (int i = 0; i < pageCount; i++)
             {
-                WriteLine($"Please enter a valid number between 1 and {max}.");
-                continue; // Re-prompt for input
+                XElement pageElement = new XElement("Page");
+
+                Write("Title: ");
+                pageElement.Add(new XElement("Title", ReadLine()));
+
+                Write("Type: ");
+                string typeOptions = "Advertising - 1,\nNews - 2,\nPortal - 3,\nMirror - 4";
+                WebSiteType selectedType = SelectInfoFromUserInput(GetInfoFromUserInput(typeOptions, 4));
+                pageElement.Add(new XElement("Type", selectedType.ToString()));
+
+                XElement charsElement = new XElement("Chars");
+
+                // Додавання характеристик залежно від типу вебсайту
+                if (selectedType == WebSiteType.Portal || 
+                    selectedType == WebSiteType.News || 
+                    selectedType == WebSiteType.Mirror)
+                {
+                    Write("HasEmail (true/false): ");
+                    charsElement.Add(new XElement("HasEmail", ReadLine()));
+                }
+
+                if (selectedType == WebSiteType.News)
+                {
+                    Write("HasNews (true/false): ");
+                    charsElement.Add(new XElement("HasNews", ReadLine()));
+                }
+
+                if (selectedType == WebSiteType.Mirror)
+                {
+                    Write("HasArchive (true/false): ");
+                    charsElement.Add(new XElement("HasArchive", ReadLine()));
+                }
+
+                // Додавання елементів голосування
+                Write("Has voting (true/false): ");
+                bool hasVotingBool = bool.Parse(ReadLine()!);
+                var hasVotingElement = new XElement("HasVoting", hasVotingBool);
+                charsElement.Add(hasVotingElement);
+
+                if (hasVotingBool)
+                {
+                    Write("Anonymous (true/false): ");
+                    hasVotingElement.Add(new XElement("Anonymous", ReadLine()));
+                }
+                else
+                {
+                    WriteLine("The voting requires authorization");
+                    hasVotingElement.Add(new XElement("Authorization", "true"));
+                }
+
+                // Інші характеристики
+                Write("PaidContent (true/false): ");
+                charsElement.Add(new XElement("PaidContent", ReadLine()));
+
+                Write("Authorize (true/false): ");
+                pageElement.Add(new XElement("Authorize", ReadLine()));
+
+                pageElement.Add(charsElement);
+                root?.Add(pageElement);
             }
 
-            exit = true; // Valid input
-            WriteLine("___________________________________");
+            xmlDoc.Save(filepath);
+            WriteLine("Дані збережено у XML файл.");
         }
 
-        return value;
-    }
-
-    private static WebSiteType SelectInfoFromUserInput(int value)
-    {
-        return value switch
+        private static int GetInfoFromUserInput(string input, int max)
         {
-            1 => WebSiteType.Advertising,
-            2 => WebSiteType.News,
-            3 => WebSiteType.Portal,
-            4 => WebSiteType.Mirror,
-            _ => throw new Exception("Invalid value provided.")
-        };
-    }
-}
+            bool exit = false;
+            int value = 0;
+            while (!exit)
+            {
+                WriteLine(input);
+                WriteLine("___________________________________");
 
-public enum WebSiteType
-{
-    Advertising,
-    News,
-    Portal,
-    Mirror
+                string? userInput = ReadLine();
+
+                if (!int.TryParse(userInput, out value) || value < 1 || value > max)
+                {
+                    WriteLine($"Please enter a valid number between 1 and {max}.");
+                    continue;
+                }
+
+                exit = true;
+                WriteLine("___________________________________");
+            }
+
+            return value;
+        }
+
+        private static WebSiteType SelectInfoFromUserInput(int value)
+        {
+            return value switch
+            {
+                1 => WebSiteType.Advertising,
+                2 => WebSiteType.News,
+                3 => WebSiteType.Portal,
+                4 => WebSiteType.Mirror,
+                _ => throw new Exception("Invalid value provided.")
+            };
+        }
+    }
+
+    public enum WebSiteType
+    {
+        Advertising,
+        News,
+        Portal,
+        Mirror
+    }
 }

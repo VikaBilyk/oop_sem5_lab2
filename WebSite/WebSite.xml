@@ -1,3 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Site>
   <Page>
     <Title>d</Title>
@@ -6,6 +7,56 @@
     <Chars>
       <HasVoting>True</HasVoting>
       <Anonymous>false</Anonymous>
+      <PaidContent>true</PaidContent>
+    </Chars>
+  </Page>
+  <Page>
+    <Title>f</Title>
+    <Type>Advertising</Type>
+    <Authorize>true</Authorize>
+    <Chars>
+      <HasVoting>true<Anonymous>true</Anonymous></HasVoting>
+      <PaidContent>true</PaidContent>
+    </Chars>
+  </Page>
+  <Page>
+    <Title>g</Title>
+    <Type>News</Type>
+    <Authorize>true</Authorize>
+    <Chars>
+      <HasEmail>true</HasEmail>
+      <HasNews>true</HasNews>
+      <HasVoting>true<Anonymous>false</Anonymous></HasVoting>
+      <PaidContent>true</PaidContent>
+    </Chars>
+  </Page>
+  <Page>
+    <Title>v</Title>
+    <Type>Portal</Type>
+    <Authorize>true</Authorize>
+    <Chars>
+      <HasEmail>true</HasEmail>
+      <HasVoting>true<Anonymous>true</Anonymous></HasVoting>
+      <PaidContent>true</PaidContent>
+    </Chars>
+  </Page>
+  <Page>
+    <Title>l</Title>
+    <Type>Mirror</Type>
+    <Authorize>true</Authorize>
+    <Chars>
+      <HasEmail>true</HasEmail>
+      <HasArchive>true</HasArchive>
+      <HasVoting>false<Authorization>true</Authorization></HasVoting>
+      <PaidContent>true</PaidContent>
+    </Chars>
+  </Page>
+  <Page>
+    <Title>d</Title>
+    <Type>Advertising</Type>
+    <Authorize>true</Authorize>
+    <Chars>
+      <HasVoting>true<Anonymous>true</Anonymous></HasVoting>
       <PaidContent>true</PaidContent>
     </Chars>
   </Page>
