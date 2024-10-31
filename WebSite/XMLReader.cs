@@ -85,6 +85,7 @@ public class XmlReader
                 }
             }
         }
+        pages.Sort(new PageComparer());
         return pages;
     }
     

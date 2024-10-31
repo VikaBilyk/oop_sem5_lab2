@@ -86,6 +86,7 @@ namespace WebSite
                 pages.Add(page);
             }
 
+            pages.Sort(new PageComparer());
             return pages;
         }
     }
