@@ -11,7 +11,7 @@ class Program
     {
         var logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
-            .WriteTo.Console()  // Log to console
+            .WriteTo.Console() 
             .WriteTo.File("logs\\log-.txt", rollingInterval: RollingInterval.Day) 
             .CreateLogger();
 
@@ -25,9 +25,6 @@ class Program
             File.Delete(outputXmlPath);
             Log.Information("Existing output file deleted: {OutputXmlPath}", outputXmlPath);
         }
-        
-        Log.Information("Вміст вхідного файлу перед трансформацією: {Content}", File.ReadAllText(xmlFilePath));
-
         
         XslCompiledTransform xslt = new XslCompiledTransform();
         xslt.Load(xsltFilePath); 
@@ -43,7 +40,6 @@ class Program
 
         try
         {
-            
             using (XmlWriter writer = XmlWriter.Create(outputXmlPath, settings))
             {
                 xslt.Transform(xmlFilePath, writer);
