@@ -5,31 +5,37 @@ using WebSite;
 using System.Xml.Xsl;
 using System.IO;
 using System.Xml.Schema;
+using Serilog;
+using Serilog.Sinks.File;
 
 class Program
 {
     static void Main()
     {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.Console()  // Log to console
+            .WriteTo.File("logs\\log-.txt", rollingInterval: RollingInterval.Day) 
+            .CreateLogger();
+
         string xmlFilePath = "/Users/viktoriyabilyk/RiderProjects/WebSite/WebSite/WebSite.xml";
         string xsdFilePath = "/Users/viktoriyabilyk/RiderProjects/WebSite/WebSite/WebSchema.xsd";
         string xsltFilePath = "/Users/viktoriyabilyk/RiderProjects/WebSite/WebSite/transform.xslt";
         string outputXmlPath = "/Users/viktoriyabilyk/RiderProjects/WebSite/WebSite/output.xml";
         
-        // Перевірка існування вихідного файлу і його видалення
         if (File.Exists(outputXmlPath))
         {
             File.Delete(outputXmlPath);
+            Log.Information("Existing output file deleted: {OutputXmlPath}", outputXmlPath);
         }
+        
+        Log.Information("Вміст вхідного файлу перед трансформацією: {Content}", File.ReadAllText(xmlFilePath));
 
-        // Виведення вмісту вхідного XML
-        Console.WriteLine("Вміст вхідного файлу перед трансформацією:");
-        Console.WriteLine(File.ReadAllText(xmlFilePath));
-
-        // Створюємо XslCompiledTransform
+        
         XslCompiledTransform xslt = new XslCompiledTransform();
         xslt.Load(xsltFilePath); 
 
-        // Налаштування для XmlWriter
+        
         XmlWriterSettings settings = new XmlWriterSettings
         {
             Indent = true,                  
@@ -40,78 +46,78 @@ class Program
 
         try
         {
-            // Трансформуємо XML та зберігаємо результат
+            
             using (XmlWriter writer = XmlWriter.Create(outputXmlPath, settings))
             {
                 xslt.Transform(xmlFilePath, writer);
             }
 
-            Console.WriteLine("Transformation complete. Output saved to " + outputXmlPath);
+            Log.Information("Transformation complete. Output saved to {OutputXmlPath}", outputXmlPath);
 
-            // Перевірка наявності вихідного файлу
+            
             if (File.Exists(outputXmlPath))
             {
-                Console.WriteLine("Output file exists and was successfully created.");
+                Log.Information("Output file exists and was successfully created.");
             }
             else
             {
-                Console.WriteLine("Output file was not created.");
+                Log.Warning("Output file was not created.");
             }
 
-            // Валідація XML документа
+            
             ValidateXml(xmlFilePath, xsdFilePath);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error during transformation: {ex.Message}");
+            Log.Error(ex, "Error during transformation");
         }
-
-        // Виклик WebSiteManager
+        
         WebSiteManager webSiteManager = new WebSiteManager();
         webSiteManager.GetAndSaveToXml(xmlFilePath);
         
         // Читання даних за допомогою XmlReader
-        WebSite.XmlReader xmlReader = new WebSite.XmlReader(); // Specify the custom class here
+        WebSite.XmlReader xmlReader = new WebSite.XmlReader();
         List<Page> pagesFromXmlReader = xmlReader.ParseXml(xmlFilePath);
-        Console.WriteLine("*************************************");
-        Console.WriteLine("Читання даних за допомогою XmlReader:");
-        Console.WriteLine("*************************************");
+        Log.Information("*************************************");
+        Log.Information("Читання даних за допомогою XmlReader:");
+        Log.Information("*************************************");
         DisplayPages(pagesFromXmlReader);
 
         // Читання даних за допомогою XmlDocument
         XmlDocumentHandler doc = new XmlDocumentHandler();
         List<Page> pagesFromXmlDocument = doc.ParseXml(xmlFilePath);
-        Console.WriteLine("*************************************");
-        Console.WriteLine("Читання даних за допомогою XmlDocument:");
-        Console.WriteLine("*************************************");
+        Log.Information("*************************************");
+        Log.Information("Читання даних за допомогою XmlDocument:");
+        Log.Information("*************************************");
         DisplayPages(pagesFromXmlDocument);
+        
+        Log.CloseAndFlush();
     }
 
     static void ValidateXml(string xmlFilePath, string xsdFilePath)
     {
         XmlSchemaSet schemas = new XmlSchemaSet();
-        schemas.Add("", xsdFilePath); // Додаємо схему
+        schemas.Add("", xsdFilePath); 
 
         XmlReaderSettings settings = new XmlReaderSettings();
         settings.Schemas = schemas;
         settings.ValidationType = ValidationType.Schema;
         settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
-
-        // Use fully qualified name for XmlReader
+        
         using (System.Xml.XmlReader reader = System.Xml.XmlReader.Create(xmlFilePath, settings))
         {
             try
             {
-                while (reader.Read()) ; // Читаємо файл, валідація відбувається під час читання
-                Console.WriteLine("XML is valid.");
+                while (reader.Read()) ;
+                Log.Information("XML is valid.");
             }
             catch (XmlException ex)
             {
-                Console.WriteLine($"XML Exception: {ex.Message}");
+                Log.Error(ex, "XML Exception");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception: {ex.Message}");
+                Log.Error(ex, "Exception occurred");
             }
         }
     }
@@ -119,23 +125,25 @@ class Program
     static void ValidationCallback(object sender, ValidationEventArgs e)
     {
         if (e.Severity == XmlSeverityType.Warning)
-            Console.WriteLine($"Warning: {e.Message}");
+            Log.Warning("Warning: {Message}", e.Message);
         else if (e.Severity == XmlSeverityType.Error)
-            Console.WriteLine($"Error: {e.Message}");
+            Log.Error("Error: {Message}", e.Message);
     }
 
     static void DisplayPages(List<Page> pages)
     {
         foreach (var page in pages)
         {
-            Console.WriteLine($"Title: {page.Title}, Type: {page.Type}, Authorize: {page.Authorize}");
-            Console.WriteLine($"HasEmail: {page.Chars.HasEmail}, HasNews: {page.Chars.HasNews}, PaidContent: {page.Chars.PaidContent}");
+            Log.Information("Title: {Title}, Type: {Type}, Authorize: {Authorize}", page.Title, page.Type, page.Authorize);
+            Log.Information("HasEmail: {HasEmail}, HasNews: {HasNews}, PaidContent: {PaidContent}", 
+                page.Chars.HasEmail, page.Chars.HasNews, page.Chars.PaidContent);
                 
             if (page.Chars.HasVoting != null && page.Chars.HasVoting == true)
             {
-                Console.WriteLine($"Anonymous: {page.Chars.Anonymous}, Authorization: {page.Chars.Authorization}");
+                Log.Information("Anonymous: {Anonymous}, Authorization: {Authorization}", 
+                    page.Chars.Anonymous, page.Chars.Authorization);
             }
-            Console.WriteLine("____________________________________");
+            Log.Information("____________________________________");
         }
     }
 }

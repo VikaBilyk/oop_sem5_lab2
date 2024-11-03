@@ -7,6 +7,12 @@
         <Nullable>enable</Nullable>
         <OutputPath>bin\$(Configuration)\</OutputPath> <!-- Встановлюємо OutputPath -->
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Serilog" Version="4.1.1-dev-02318" />
+      <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+      <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    </ItemGroup>
     <Target Name="CopyFilesAfterBuild" AfterTargets="Build">
         <Message Text="Copying files to the output directory..." Importance="high" />
         <Copy SourceFiles="@(Compile)" DestinationFolder="$(OutputPath)CopiedFiles\" />
