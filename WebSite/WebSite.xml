@@ -1,35 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Site>
   <Page>
-    <Title>a</Title>
-    <Type>News</Type>
-    <Authorize>true</Authorize>
-    <Chars>
-      <HasEmail>true</HasEmail>
-      <HasNews>true</HasNews>
-      <HasArchive>false</HasArchive>
-      <HasVoting>true</HasVoting>
-      <Anonymous>true</Anonymous>
-      <Authorization>false</Authorization>
-      <PaidContent>true</PaidContent>
-    </Chars>
-  </Page>
-  <Page>
-    <Title>b</Title>
-    <Type>Advertising</Type>
-    <Authorize>true</Authorize>
-    <Chars>
-      <HasEmail>false</HasEmail>
-      <HasNews>false</HasNews>
-      <HasArchive>false</HasArchive>
-      <HasVoting>true</HasVoting>
-      <Anonymous>true</Anonymous>
-      <Authorization>false</Authorization>
-      <PaidContent>true</PaidContent>
-    </Chars>
-  </Page>
-  <Page>
-    <Title>r</Title>
+    <Title>в</Title>
     <Type>Advertising</Type>
     <Authorize>true</Authorize>
     <Chars>

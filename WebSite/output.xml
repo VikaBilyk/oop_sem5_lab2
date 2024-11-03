@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NewSite>
+  <NewPage>
+    <NewTitle>в</NewTitle>
+    <NewType>Advertising</NewType>
+    <NewChars>
+      <NewHasEmail>false</NewHasEmail>
+      <NewHasNews>false</NewHasNews>
+      <NewHasArchive>false</NewHasArchive>
+      <NewHasVoting>true</NewHasVoting>
+      <NewPaidContent>true</NewPaidContent>
+    </NewChars>
+    <NewAuthorize>true</NewAuthorize>
+  </NewPage>
+</NewSite>
