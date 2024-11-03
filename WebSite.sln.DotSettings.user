@@ -1,0 +1,91 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0c8b47c0_002D0307_002D4c9a_002D8db5_002D17d6e4edf1cf/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAndSaveToXml_FileExists_LoadsAndLogs #5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileExists_LoadsAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=17ad3a51_002Dd3b4_002D4c87_002D9f1e_002D0875025d3d23/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SelectInfoFromUserInput_ValidInput_ReturnsCorrectEnum #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::Test.WebSiteManagerTests.SelectInfoFromUserInput_ValidInput_ReturnsCorrectEnum&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::Test.WebSiteManagerTests.SelectInfoFromUserInput_InvalidInput_ThrowsArgumentOutOfRangeException&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::Test.WebSiteManagerTests.GetInfoFromUserInput_ValidInput_ReturnsCorrectValue&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::Test.WebSiteManagerTests.GetAndSaveToXml_FileExists_LoadsAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=200e1809_002Db8f8_002D4f06_002Da167_002D12271281db49/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetInfoFromUserInput_ValidInput_ReturnsCorrectValue" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetInfoFromUserInput_ValidInput_ReturnsCorrectValue&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.SelectInfoFromUserInput_InvalidInput_ThrowsArgumentOutOfRangeException&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileExists_LoadsAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3eb42453_002D2802_002D4dfc_002D9338_002D6b00adaaef05/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAndSaveToXml_FileExists_LoadsAndLogs #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileExists_LoadsAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4588ad05_002Db33f_002D4dd7_002Da30c_002Dbfbef16ebfc6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAndSaveToXml_FileExists_LoadsAndLogs #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileExists_LoadsAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=50f9fbca_002D4917_002D41f9_002Db09c_002Da74eb9e2be22/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="WebSiteManagerTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=68a0182c_002D15af_002D4855_002D921c_002D86515dc10fb6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAndSaveToXml_FileExists_LoadsAndLogs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileExists_LoadsAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6e0d607a_002D47af_002D43c5_002Db5c2_002D2f495921c9ce/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetAndSaveToXml_FileDoesNotExist_CreatesNewFileAndLogs #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::Test.WebSiteManagerTests.GetAndSaveToXml_FileDoesNotExist_CreatesNewFileAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=779d1ee1_002Dc48c_002D44f3_002Da18e_002D2b95750dca92/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SelectInfoFromUserInput_ValidInput_ReturnsCorrectEnum #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.SelectInfoFromUserInput_ValidInput_ReturnsCorrectEnum&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileDoesNotExist_CreatesNewFileAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8136e899_002D6a14_002D4e8b_002Db33c_002D66f136650ce5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAndSaveToXml_FileDoesNotExist_CreatesNewFileAndLogs #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileDoesNotExist_CreatesNewFileAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=81c9de85_002De533_002D4eae_002D8e15_002De64682f8f3c3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetInfoFromUserInput_ValidInput_ReturnsCorrectValue #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetInfoFromUserInput_ValidInput_ReturnsCorrectValue&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.SelectInfoFromUserInput_InvalidInput_ThrowsArgumentOutOfRangeException&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.SelectInfoFromUserInput_ValidInput_ReturnsCorrectEnum&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileDoesNotExist_CreatesNewFileAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=adfe6961_002De76e_002D4707_002Db018_002Dc07650316049/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SelectInfoFromUserInput_ValidInput_ReturnsCorrectEnum" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.SelectInfoFromUserInput_ValidInput_ReturnsCorrectEnum&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileDoesNotExist_CreatesNewFileAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b99b9da7_002Deed0_002D4239_002Db67f_002D74a7966b9a07/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAndSaveToXml_FileExists_LoadsAndLogs #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileExists_LoadsAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d4d78f5f_002Dc906_002D4b4f_002Dbacb_002D4707aed2ce6e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="WebSiteManagerTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e2419127_002Dd11b_002D441e_002D854f_002Dc28d35321894/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAndSaveToXml_FileDoesNotExist_CreatesNewFileAndLogs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileDoesNotExist_CreatesNewFileAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=eca9db14_002D1835_002D4d8b_002D88a8_002D9afdeae03718/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetAndSaveToXml_FileDoesNotExist_CreatesNewFileAndLogs #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::6C944B1C-3AD9-4FB3-8ED2-882670606A0B::net8.0::WebSite.Tests.WebSiteManagerTests.GetAndSaveToXml_FileDoesNotExist_CreatesNewFileAndLogs&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
