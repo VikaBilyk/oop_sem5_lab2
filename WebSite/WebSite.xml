@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Site>
   <Page>
-    <Title>к</Title>
+    <Title>r</Title>
     <Type>Advertising</Type>
     <Authorize>true</Authorize>
     <Chars>
       <HasEmail>false</HasEmail>
       <HasNews>false</HasNews>
       <HasArchive>false</HasArchive>
-      <HasVoting>false</HasVoting>
-      <Anonymous>false</Anonymous>
-      <Authorization>true</Authorization>
+      <HasVoting>true</HasVoting>
+      <Anonymous>true</Anonymous>
+      <Authorization>false</Authorization>
       <PaidContent>true</PaidContent>
     </Chars>
   </Page>

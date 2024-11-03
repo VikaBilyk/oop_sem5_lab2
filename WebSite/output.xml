@@ -1,23 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <NewSite>
   <NewPage>
-    <NewTitle>f</NewTitle>
+    <NewTitle>r</NewTitle>
     <NewType>Advertising</NewType>
     <NewChars>
       <NewHasEmail>false</NewHasEmail>
       <NewHasNews>false</NewHasNews>
-      <NewHasArchive>false</NewHasArchive>
-      <NewHasVoting>true</NewHasVoting>
-      <NewPaidContent>true</NewPaidContent>
-    </NewChars>
-    <NewAuthorize>true</NewAuthorize>
-  </NewPage>
-  <NewPage>
-    <NewTitle>true</NewTitle>
-    <NewType>News</NewType>
-    <NewChars>
-      <NewHasEmail>true</NewHasEmail>
-      <NewHasNews>true</NewHasNews>
       <NewHasArchive>false</NewHasArchive>
       <NewHasVoting>true</NewHasVoting>
       <NewPaidContent>true</NewPaidContent>

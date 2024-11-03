@@ -1,18 +1,15 @@
-﻿using System;
-using System.Xml;
-using System.Xml.Linq;
-using WebSite;
-using System.Xml.Xsl;
-using System.IO;
+﻿using System.Xml;
 using System.Xml.Schema;
+using System.Xml.Xsl;
 using Serilog;
-using Serilog.Sinks.File;
+
+namespace WebSite;
 
 class Program
 {
     static void Main()
     {
-        Log.Logger = new LoggerConfiguration()
+        var logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.Console()  // Log to console
             .WriteTo.File("logs\\log-.txt", rollingInterval: RollingInterval.Day) 
@@ -72,11 +69,11 @@ class Program
             Log.Error(ex, "Error during transformation");
         }
         
-        WebSiteManager webSiteManager = new WebSiteManager();
+        WebSiteManager webSiteManager = new WebSiteManager(logger);
         webSiteManager.GetAndSaveToXml(xmlFilePath);
         
         // Читання даних за допомогою XmlReader
-        WebSite.XmlReader xmlReader = new WebSite.XmlReader();
+        XmlReader xmlReader = new XmlReader();
         List<Page> pagesFromXmlReader = xmlReader.ParseXml(xmlFilePath);
         Log.Information("*************************************");
         Log.Information("Читання даних за допомогою XmlReader:");
@@ -102,7 +99,7 @@ class Program
         XmlReaderSettings settings = new XmlReaderSettings();
         settings.Schemas = schemas;
         settings.ValidationType = ValidationType.Schema;
-        settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
+        settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback!);
         
         using (System.Xml.XmlReader reader = System.Xml.XmlReader.Create(xmlFilePath, settings))
         {

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Xml.Linq;
 using Serilog;
 
@@ -10,19 +7,15 @@ namespace WebSite
     {
         private readonly ILogger _logger;
 
-        public WebSiteManager()
+        public WebSiteManager(ILogger logger)
         {
-            _logger = new LoggerConfiguration()
-                .WriteTo.Console()
-                .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
-                .CreateLogger();
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public void GetAndSaveToXml(string filepath)
         {
             XDocument xmlDoc;
-
-            // Load or create XML document
+            
             if (File.Exists(filepath))
             {
                 xmlDoc = XDocument.Load(filepath);
@@ -34,7 +27,7 @@ namespace WebSite
                 _logger.Information("Created new XML document.");
             }
 
-            XElement root = xmlDoc.Element("Site");
+            XElement root = xmlDoc.Element("Site")!;
 
             _logger.Information("How many pages would you like to add?");
             int pageCount = int.Parse(Console.ReadLine()!);
@@ -46,7 +39,7 @@ namespace WebSite
                 Page page = new Page();
 
                 _logger.Information("Title: ");
-                page.Title = Console.ReadLine();
+                page.Title = Console.ReadLine()!;
 
                 string typeOptions = "Advertising - 1, News - 2, Portal - 3, Mirror - 4";
                 page.Type = SelectInfoFromUserInput(GetInfoFromUserInput(typeOptions, 4)).ToString();
@@ -87,16 +80,15 @@ namespace WebSite
                 }
 
                 _logger.Information("PaidContent (true/false): ");
-                chars.PaidContent = bool.Parse(Console.ReadLine());
+                chars.PaidContent = bool.Parse(Console.ReadLine()!);
 
                 _logger.Information("Authorize (true/false): ");
-                page.Authorize = bool.Parse(Console.ReadLine());
+                page.Authorize = bool.Parse(Console.ReadLine()!);
 
                 page.Chars = chars;
                 pages.Add(page);
             }
-
-            // Sort and add pages to XML
+            
             pages.Sort(new PageComparer());
             root.RemoveAll();
 
@@ -116,14 +108,14 @@ namespace WebSite
                         new XElement("PaidContent", page.Chars.PaidContent)
                     )
                 );
-                root!.Add(pageElement);
+                root.Add(pageElement);
             }
 
             xmlDoc.Save(filepath);
             _logger.Information("Data successfully saved to XML file at: {FilePath}", filepath);
         }
 
-        private int GetInfoFromUserInput(string input, int max)
+        public int GetInfoFromUserInput(string input, int max)
         {
             int value;
             do
@@ -138,7 +130,7 @@ namespace WebSite
             return value;
         }
 
-        private WebSiteType SelectInfoFromUserInput(int value) => value switch
+        public WebSiteType SelectInfoFromUserInput(int value) => value switch
         {
             1 => WebSiteType.Advertising,
             2 => WebSiteType.News,
