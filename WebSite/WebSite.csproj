@@ -5,6 +5,11 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <OutputPath>bin\$(Configuration)\</OutputPath> <!-- Встановлюємо OutputPath -->
     </PropertyGroup>
-
+    <Target Name="CopyFilesAfterBuild" AfterTargets="Build">
+        <Message Text="Copying files to the output directory..." Importance="high" />
+        <Copy SourceFiles="@(Compile)" DestinationFolder="$(OutputPath)CopiedFiles\" />
+    </Target>
 </Project>
+
